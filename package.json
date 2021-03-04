@@ -1,0 +1,27 @@
+{
+  "name": "learn-koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve-session": "npx nodemon learn-session.js",
+    "serve-nodemailer": "npx nodemon learn-nodemailer.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.13.1",
+    "koa-mysql-session": "0.0.2",
+    "koa-redis": "^4.0.1",
+    "koa-router": "^10.0.0",
+    "koa-session": "^6.1.0",
+    "koa-session-minimal": "^4.0.0",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
