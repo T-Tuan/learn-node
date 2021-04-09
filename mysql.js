@@ -19,3 +19,6 @@ let query = function (sql, values) {
 }
 
 module.exports = {query}
+
+
+console.log(global.a);
