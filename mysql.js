@@ -18,4 +18,6 @@ let query = function (sql, values) {
   })
 }
 
-module.exports = {query}
+module.exports = {
+  query
+}

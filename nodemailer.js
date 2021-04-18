@@ -17,24 +17,33 @@ async function main() {
     },
   })
 
+  // transporter.verify(function (error, success) {
+  //   if (error) {
+  //     console.log(error)
+  //   } else {
+  //     console.log("Server is ready to take our messages")
+  //   }
+  // })
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <2937570410@qq.com>', // sender address
-    to: "2973959570@qq.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    from: '"👻" <2937570410@qq.com>', // sender address
+    to: "429461542@qq.com", // list of receivers
+    subject: "腾讯送福利！", // Subject line
+    text: "", // plain text body
+    html: "<h1>森林就是大**</h1>", // html body
   })
 
   console.log("Message sent: %s", info.messageId)
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
+  // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
-main().catch(console.error)
+
+setInterval(main,1000*10)
+
 
 // let transporter = nodemailer.createTransport({
 //   host: "smtp.qq.com",

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <a href="http://127.0.0.1:8088/" id="a">a</a>
+
+  <div class="controls">
+    <input class="xhr success" type="button" name="xhr" value="Click to start XHR (success)" />
+    <input class="xhr error" type="button" name="xhr" value="Click to start XHR (error)" />
+    <input class="xhr abort" type="button" name="xhr" value="Click to start XHR (abort)" />
+  </div>
+
+  <textarea readonly class="event-log"></textarea>
+
+</body>
+<script>
+  const xhr = new XMLHttpRequest()
+  xhr.open("GET", `http://127.0.0.1:8088/`);
+
+  function handleEvent(e) {
+    console.log(e);
+    console.log(`${e.type}: ${e.loaded} bytes transferred\n`);
+  }
+
+  // xhr.addEventListener('loadstart', handleEvent);
+  // xhr.addEventListener('load', handleEvent);
+  // xhr.addEventListener('loadend', handleEvent);
+  xhr.addEventListener('progress', handleEvent);
+  // xhr.addEventListener('error', handleEvent);
+  // xhr.addEventListener('abort', handleEvent);
+  xhr.onload = function (oEvent) {
+    const _blob = new Blob([xhr.response]);
+    const elink = document.createElement('a');
+    const hasFileName = xhr.getResponseHeader('content-disposition');
+    elink.download = (hasFileName && decodeURI(hasFileName.split(`UTF-8''`)[1])) || '未命名.你想要的扩展名';
+    elink.style.display = 'none';
+    elink.href = URL.createObjectURL(_blob);
+    elink.target = '_blank';
+    document.body.appendChild(elink);
+    elink.click();
+    document.body.removeChild(elink);
+  }
+  xhr.send();
+
+
+
+
+
+
+
+  // let xhr = new XMLHttpRequest();
+  // console.log(xhr);
+  // xhr.open('GET', 'http://127.0.0.1:8088/', true);
+
+  // // xhr.onreadystatechange = function (a) {
+  // //   if (xhr.readyState == 4 && xhr.status == 200) {
+  // //     console.log(a);
+  // //   }
+  // // }
+
+  // xhr.addEventListener('progress', function (event) {
+  //   console.log(event);
+  //   console.log(event.loaded); // 最后输出1
+  //   // 响应头要有Content-Length
+  //   // if (event.lengthComputable) {
+  //   let percentComplete = event.loaded / event.total;
+  //   alert(`${percentComplete}%`)
+  //   // }
+  // }, true);
+
+  // // xhr.onload = () => {
+  // //   l(...xhr.response.imgsSrc);
+  // // }
+
+  // xhr.send();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  async function main() {
+    const l = console.log
+    let fileEle = document.querySelector('#a')
+    fileEle.onchange = e => {
+      let files = fileEle.files
+      if (files.length === 0) return false;
+
+      let data = new FormData()
+      for (const file of files) {
+        data.append('files', file)
+      }
+
+      let xhr = new XMLHttpRequest()
+
+      xhr.upload.addEventListener('progress', e => {
+        if (e.lengthComputable) {
+          var percentage = Math.round((e.loaded * 100) / e.total);
+          l(`${percentage}%`)
+        }
+      })
+
+      xhr.open('post', 'http://127.0.0.1:8088/')
+      xhr.responseType = 'json'
+      xhr.send(data)
+
+      xhr.upload.addEventListener('loadstart', e => {
+        l('上传开始')
+      })
+
+      xhr.upload.addEventListener('error', e => {
+        l('上传失败')
+      })
+
+      xhr.upload.addEventListener('abort', e => {
+        l('上传终止')
+      })
+
+      xhr.upload.addEventListener('timeout', e => {
+        l('由于预设时间到期，上传终止')
+      })
+
+      xhr.upload.addEventListener('load', e => {
+        l('上传成功了')
+      })
+
+      xhr.upload.addEventListener('loadend', e => {
+        l('上传已经停止了')
+      })
+
+      xhr.onload = () => {
+        l(...xhr.response.imgsSrc);
+      }
+
+    }
+  }
+  // main();
+</script>
+
+</html>
