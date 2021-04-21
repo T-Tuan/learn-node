@@ -1,0 +1,66 @@
+{
+  "方法注释": {
+    "prefix": "zsfn",
+    "body": [
+      "/**",
+      " * @description description... $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      " * @param { ${1|Boolean,Number,String,Object,Array,Function,*|} }",
+      " * @return { ${2|Boolean,Number,String,Object,Array,Function,*|} }",
+      " */",
+      "$0"
+    ]
+  },
+
+  "req": {
+    "prefix": "req",
+    "body": ["require(\"$1\")", "$0"]
+  },
+
+  "vue2.0模板": {
+    "scope": "vue",
+    "prefix": "vue2",
+    "body": [
+      "<template>",
+      "  <!--  -->",
+      "  <div class=\"${1:$TM_FILENAME_BASE}\">",
+      "    $2",
+      "  </div>",
+      "</template>",
+      "",
+      "<script>",
+      "export default {",
+      "  name: '$1',",
+      "  data() {",
+      "    return {$0}",
+      "  },",
+      "  props: {},",
+      "  component: {},",
+      "  watch: {",
+      "    /**",
+      "    fnName: {",
+      "      handler: (newVal, oldVal) => {},",
+      "      deep: true,",
+      "      immediate: true",
+      "    }",
+      "     */",
+      "  },",
+      "  created() {},",
+      "  mounted() {",
+      "    // this.\\$once(\"hook:beforeDestroy\", () => {})",
+      "  },",
+      "  /** keepAlive 时调用 */",
+      "  // activated() {},",
+      "  beforeRouteLeave(to, from, next) {},",
+      "  beforeDestory() {}",
+      "}",
+      "</script>",
+      "",
+      "<style scoped lang=\"\">",
+      ".$1 {",
+      "}",
+      "</style>",
+      ""
+    ],
+    "description": "vue2.0模板"
+  }
+}

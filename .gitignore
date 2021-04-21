@@ -1,3 +1,4 @@
 node_modules
-.vscode
+.vscode/*
+!snippets.code-snippets
 package-lock.json
